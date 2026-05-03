@@ -1,4 +1,4 @@
-# To-Do (Python)
+# To-Do App (CLI - Python)
 
 A simple CLI-based To-Do application built using Python with file handling support.
 
@@ -15,3 +15,5 @@ python to-do_app.py
 ## Tech Used
 - Python
 - File Handling
+
+Future improvements include adding file storage and a graphical user interface (GUI).
