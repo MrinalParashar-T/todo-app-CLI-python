@@ -17,3 +17,10 @@ python to-do_app.py
 - File Handling
 
 Future improvements include adding file storage and a graphical user interface (GUI).
+
+## Output Screenshot
+
+![To-Do App Output](todo-app.png)
+
+## Author
+Mrinal Parashar
