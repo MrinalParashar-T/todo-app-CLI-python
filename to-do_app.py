@@ -1,88 +1,70 @@
-import os
+tasks = []
 
-file = "tasks.txt"
-
-def loadTasks():
-    tasks = []
-    if os.path.exists(file):
-        f = open(file, "r")
-        for line in f:
-            tasks.append(line.strip())
-        f.close()
-    return tasks
+def add_task():
+    task = input("Enter task: ")
+    tasks.append({"task": task, "done": False})
+    print("Task added!\n")
 
 
-def saveTasks(tasks):
-    f = open(file, "w")
-    for t in tasks:
-        f.write(t + "\n")
-    f.close()
-
-
-def addTask(tasks):
-    t = input("Enter task: ")
-    tasks.append(t)
-    saveTasks(tasks)
-    print("Task added\n")
-
-
-def showTasks(tasks):
-    if len(tasks) == 0:
-        print("No tasks\n")
+def show_tasks():
+    print("\n--- Your Tasks ---")
+    if not tasks:
+        print("No tasks available.\n")
         return
-    
-    print("Tasks:")
-    i = 1
-    for t in tasks:
-        print(i, "-", t)
-        i += 1
+
+    for i, t in enumerate(tasks):
+        status = "Done" if t["done"] else "Pending"
+        print(f"{i+1}. {t['task']} [{status}]")
     print()
 
 
-def deleteTask(tasks):
-    showTasks(tasks)
-    n = int(input("Enter number: "))
-    
-    if n > 0 and n <= len(tasks):
-        tasks.pop(n-1)
-        saveTasks(tasks)
-        print("Deleted\n")
-    else:
-        print("Invalid\n")
+def delete_task():
+    show_tasks()
+    try:
+        num = int(input("Enter task number to delete: "))
+        if 1 <= num <= len(tasks):
+            tasks.pop(num - 1)
+            print("Task deleted!\n")
+        else:
+            print("Invalid number!\n")
+    except:
+        print("Enter a valid number!\n")
 
 
-def markDone(tasks):
-    showTasks(tasks)
-    n = int(input("Enter number: "))
-    
-    if n > 0 and n <= len(tasks):
-        tasks[n-1] = tasks[n-1] + " (done)"
-        saveTasks(tasks)
-        print("Updated\n")
-    else:
-        print("Invalid\n")
+def mark_done():
+    show_tasks()
+    try:
+        num = int(input("Enter task number to mark done: "))
+        if 1 <= num <= len(tasks):
+            tasks[num - 1]["done"] = True
+            print("Task marked as done!\n")
+        else:
+            print("Invalid number!\n")
+    except:
+        print("Enter a valid number!\n")
 
 
-tasks = loadTasks()
-
+# Main loop
 while True:
-    print("1 Add")
-    print("2 Show")
-    print("3 Delete")
-    print("4 Done")
-    print("5 Exit")
+    print("===== TO-DO APP =====")
+    print("1. Add Task")
+    print("2. Show Tasks")
+    print("3. Delete Task")
+    print("4. Mark Task as Done")
+    print("5. Exit")
 
-    ch = input("Choice: ")
+    ch = input("Enter choice: ")
 
     if ch == "1":
-        addTask(tasks)
+        add_task()
     elif ch == "2":
-        showTasks(tasks)
+        show_tasks()
     elif ch == "3":
-        deleteTask(tasks)
+        delete_task()
     elif ch == "4":
-        markDone(tasks)
+        mark_done()
     elif ch == "5":
+        print("Goodbye")
         break
     else:
-        print("Wrong choice\n")
+        print("Wrong choice!\n")
