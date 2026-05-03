@@ -1,4 +1,4 @@
-# To-Do App (Python)
+# To-Do (Python)
 
 A simple CLI-based To-Do application built using Python with file handling support.
 
